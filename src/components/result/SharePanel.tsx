@@ -9,7 +9,7 @@ interface SharePanelProps {
 
 export default function SharePanel({ token, destinyName }: SharePanelProps) {
   const shareText = `我觉醒了【${destinyName}】命格！快来测测你的主角命格 👉`
-  const shareUrl = `${window.location.origin}/token?code=${token}`
+  const shareUrl = `${window.location.origin}${import.meta.env.BASE_URL}token?code=${token}`
 
   const handleWechatShare = () => {
     navigator.clipboard.writeText(`${shareText}\n${shareUrl}`).catch(() => {})

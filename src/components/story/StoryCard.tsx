@@ -37,7 +37,7 @@ export default function StoryCard({
 
   const handleCopyQuote = () => {
     const quote = extractQuote()
-    const text = `"${quote}" —— 我的命格是${destinyName}，来测测你的：${window.location.origin}/token?code=${token}`
+    const text = `"${quote}" —— 我的命格是${destinyName}，来测测你的：${window.location.origin}${import.meta.env.BASE_URL}token?code=${token}`
     navigator.clipboard.writeText(text).catch(() => {})
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)

@@ -94,7 +94,7 @@ export default function Story() {
 
   const handleShare = () => {
     const shareText = `【${renderedStory.title}】${renderedStory.hook}`
-    const shareUrl = `${window.location.origin}/story?storyId=${story.id}`
+    const shareUrl = `${window.location.origin}${import.meta.env.BASE_URL}story?storyId=${story.id}`
     if (navigator.share) {
       navigator.share({ title: renderedStory.title, text: shareText, url: shareUrl }).catch(() => {})
     } else {
