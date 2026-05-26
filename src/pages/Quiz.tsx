@@ -13,6 +13,7 @@ export default function Quiz() {
   const navigate = useNavigate()
   const [showNickname, setShowNickname] = useState(false)
   const [nicknameInput, setNicknameInput] = useState('')
+  const [initialized, setInitialized] = useState(false)
   const {
     answers,
     currentQuestion,
@@ -24,12 +25,15 @@ export default function Quiz() {
     resetQuiz,
   } = useAppStore()
 
-  useEffect(() => {
-    resetQuiz()
-  }, [])
-
   const totalQuestions = questions.length
   const question = questions[currentQuestion]
+
+  useEffect(() => {
+    if (answers.length >= totalQuestions && currentQuestion >= totalQuestions - 1) {
+      setShowNickname(true)
+    }
+    setInitialized(true)
+  }, [])
 
   const handleOptionClick = useCallback(
     (optionIndex: number) => {
@@ -59,6 +63,14 @@ export default function Quiz() {
 
     navigate(`/result?token=${token}`)
   }
+
+  const handleRestart = () => {
+    resetQuiz()
+    setShowNickname(false)
+    setNicknameInput('')
+  }
+
+  if (!initialized) return null
 
   return (
     <div className="min-h-screen flex flex-col items-center pt-8 pb-12 parchment-light">
@@ -119,6 +131,17 @@ export default function Quiz() {
               exit={{ opacity: 0, x: -60 }}
               className="w-full flex flex-col items-center gap-6"
             >
+              {answers.length > 0 && (
+                <motion.button
+                  onClick={handleRestart}
+                  className="text-xs font-serif tracking-wider self-end w-full mb-[-8px]"
+                  style={{ color: '#a08050' }}
+                  whileHover={{ color: '#8b6914' }}
+                >
+                  ← 重新开始
+                </motion.button>
+              )}
+
               <ProgressBar current={currentQuestion + 1} total={totalQuestions} />
 
               <QuestionCard

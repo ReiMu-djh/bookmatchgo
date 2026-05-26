@@ -53,9 +53,14 @@ const saveToStorage = (key: string, value: unknown) => {
   } catch {}
 }
 
+const saveQuizProgress = (answers: QuizAnswer[], currentQuestion: number) => {
+  saveToStorage('bm_quiz_answers', answers)
+  saveToStorage('bm_quiz_current', currentQuestion)
+}
+
 export const useAppStore = create<AppState>((set, get) => ({
-  answers: [],
-  currentQuestion: 0,
+  answers: loadFromStorage<QuizAnswer[]>('bm_quiz_answers', []),
+  currentQuestion: loadFromStorage<number>('bm_quiz_current', 0),
   nickname: loadFromStorage<string>('bm_nickname', ''),
   resultToken: null,
   resultDestinyKey: null,
@@ -74,11 +79,20 @@ export const useAppStore = create<AppState>((set, get) => ({
       } else {
         newAnswers.push({ questionId, optionIndex })
       }
+      saveQuizProgress(newAnswers, state.currentQuestion)
       return { answers: newAnswers }
     }),
 
-  nextQuestion: () => set(state => ({ currentQuestion: state.currentQuestion + 1 })),
-  prevQuestion: () => set(state => ({ currentQuestion: Math.max(0, state.currentQuestion - 1) })),
+  nextQuestion: () => set(state => {
+    const next = state.currentQuestion + 1
+    saveQuizProgress(state.answers, next)
+    return { currentQuestion: next }
+  }),
+  prevQuestion: () => set(state => {
+    const prev = Math.max(0, state.currentQuestion - 1)
+    saveQuizProgress(state.answers, prev)
+    return { currentQuestion: prev }
+  }),
 
   setNickname: (name) => {
     saveToStorage('bm_nickname', name)
@@ -90,6 +104,8 @@ export const useAppStore = create<AppState>((set, get) => ({
     const record: TokenRecord = { token, destinyKey, nickname, createdAt: new Date().toISOString() }
     const newRecords = [...get().tokenRecords, record]
     saveToStorage('bm_tokens', newRecords)
+    saveToStorage('bm_quiz_answers', [])
+    saveToStorage('bm_quiz_current', 0)
     set({ resultToken: token, resultDestinyKey: destinyKey, resultSubDestinyKey: subDestinyKey, tokenRecords: newRecords })
   },
 
@@ -108,5 +124,9 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({ unlockedStories: newUnlocked })
   },
 
-  resetQuiz: () => set({ answers: [], currentQuestion: 0, resultToken: null, resultDestinyKey: null, resultSubDestinyKey: null }),
+  resetQuiz: () => {
+    saveToStorage('bm_quiz_answers', [])
+    saveToStorage('bm_quiz_current', 0)
+    set({ answers: [], currentQuestion: 0, resultToken: null, resultDestinyKey: null, resultSubDestinyKey: null })
+  },
 }))
