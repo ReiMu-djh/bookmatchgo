@@ -52,7 +52,7 @@ function AnimatedRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/bookmatch">
       <div className="min-h-screen parchment-bg text-amber-100">
         <ScrollToTop />
         <AnimatedRoutes />
