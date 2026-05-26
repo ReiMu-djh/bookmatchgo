@@ -8,8 +8,7 @@
   "deploy": {
     "hosting": {
       "path": "dist",
-      "target": "/bookmatch",
-      "errorPage": "/bookmatch/index.html"
+      "target": "/"
     }
   }
 }
