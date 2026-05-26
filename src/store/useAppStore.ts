@@ -36,6 +36,7 @@ interface AppState {
   addTokenRecord: (record: TokenRecord) => void
   unlockStory: (tokenA: string, tokenB: string, storyId: string) => void
   resetQuiz: () => void
+  clearResult: () => void
 }
 
 const loadFromStorage = <T>(key: string, fallback: T): T => {
@@ -58,13 +59,19 @@ const saveQuizProgress = (answers: QuizAnswer[], currentQuestion: number) => {
   saveToStorage('bm_quiz_current', currentQuestion)
 }
 
+const saveResult = (token: string | null, destinyKey: DestinyKey | null, subDestinyKey: DestinyKey | null) => {
+  saveToStorage('bm_result_token', token)
+  saveToStorage('bm_result_destiny', destinyKey)
+  saveToStorage('bm_result_sub', subDestinyKey)
+}
+
 export const useAppStore = create<AppState>((set, get) => ({
   answers: loadFromStorage<QuizAnswer[]>('bm_quiz_answers', []),
   currentQuestion: loadFromStorage<number>('bm_quiz_current', 0),
   nickname: loadFromStorage<string>('bm_nickname', ''),
-  resultToken: null,
-  resultDestinyKey: null,
-  resultSubDestinyKey: null,
+  resultToken: loadFromStorage<string | null>('bm_result_token', null),
+  resultDestinyKey: loadFromStorage<DestinyKey | null>('bm_result_destiny', null),
+  resultSubDestinyKey: loadFromStorage<DestinyKey | null>('bm_result_sub', null),
   friendToken: null,
   friendNickname: '',
   tokenRecords: loadFromStorage<TokenRecord[]>('bm_tokens', []),
@@ -106,6 +113,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     saveToStorage('bm_tokens', newRecords)
     saveToStorage('bm_quiz_answers', [])
     saveToStorage('bm_quiz_current', 0)
+    saveResult(token, destinyKey, subDestinyKey)
     set({ resultToken: token, resultDestinyKey: destinyKey, resultSubDestinyKey: subDestinyKey, tokenRecords: newRecords })
   },
 
@@ -127,6 +135,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   resetQuiz: () => {
     saveToStorage('bm_quiz_answers', [])
     saveToStorage('bm_quiz_current', 0)
-    set({ answers: [], currentQuestion: 0, resultToken: null, resultDestinyKey: null, resultSubDestinyKey: null })
+    set({ answers: [], currentQuestion: 0 })
+  },
+
+  clearResult: () => {
+    saveResult(null, null, null)
+    set({ resultToken: null, resultDestinyKey: null, resultSubDestinyKey: null })
   },
 }))

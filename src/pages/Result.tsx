@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { AlertCircle } from 'lucide-react'
+import { AlertCircle, RotateCcw } from 'lucide-react'
 import DestinyCard from '@/components/result/DestinyCard'
 import ProtagonistCard from '@/components/result/ProtagonistCard'
 import BookRecommend from '@/components/result/BookRecommend'
@@ -18,7 +18,7 @@ type DestinyKey = keyof typeof destinyMap
 export default function Result() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const { resultToken, resultDestinyKey, nickname } = useAppStore()
+  const { resultToken, resultDestinyKey, nickname, clearResult } = useAppStore()
   const [friendToken, setFriendToken] = useState('')
   const [friendError, setFriendError] = useState('')
 
@@ -106,6 +106,11 @@ export default function Result() {
     }
   }
 
+  const handleRetest = () => {
+    clearResult()
+    navigate('/quiz')
+  }
+
   return (
     <div
       className="min-h-screen flex flex-col items-center px-5 py-8"
@@ -179,6 +184,17 @@ export default function Result() {
             )}
           </div>
         </motion.div>
+
+        <motion.button
+          onClick={handleRetest}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
+          className="flex items-center justify-center gap-1.5 text-xs font-serif py-3 transition-colors"
+          style={{ color: `${destiny.secondaryColor}55` }}
+        >
+          <RotateCcw className="w-3.5 h-3.5" />
+          再测一次，换个命格
+        </motion.button>
       </div>
     </div>
   )
