@@ -1,3 +1,0 @@
-/* CloudBase SPA 路由回退：所有非文件请求都返回 index.html */
-/* /bookmatch/* -> /bookmatch/index.html */
-/bookmatch/* /bookmatch/index.html 200
