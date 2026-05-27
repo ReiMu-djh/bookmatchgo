@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Copy, Check } from 'lucide-react'
+import { formatStoryText } from '@/utils/storyFormat'
 
 interface StoryCardProps {
   title: string
@@ -12,6 +13,31 @@ interface StoryCardProps {
   token: string
   destinyName: string
   onShare?: () => void
+}
+
+function StoryContent({ raw }: { raw: string }) {
+  const segments = useMemo(() => formatStoryText(raw), [raw])
+
+  return (
+    <div className="space-y-2">
+      {segments.map((seg, i) => {
+        if (seg.type === 'dialogue') {
+          return (
+            <p key={i} className="text-amber-200/90 text-sm leading-loose font-serif pl-4 border-l-2 border-amber-500/20">
+              {seg.text}
+            </p>
+          )
+        }
+
+        const paragraphs = seg.text.split(/(?<=[。！？])/).filter(s => s.trim())
+        return (
+          <p key={i} className="text-amber-100/75 text-sm leading-loose font-serif indent-[2em]">
+            {paragraphs.join('')}
+          </p>
+        )
+      })}
+    </div>
+  )
 }
 
 export default function StoryCard({
@@ -28,8 +54,8 @@ export default function StoryCard({
   const [copied, setCopied] = useState(false)
 
   const extractQuote = () => {
-    const match = content.match(/「(.+?)」|"(.+?)"|'(.+?)'/)
-    if (match) return match[1] || match[2] || match[3]
+    const match = content.match(/"(.+?)"/)
+    if (match) return match[1]
     const sentences = content.split(/[。！？]/).filter((s) => s.length > 5 && s.length < 30)
     if (sentences.length > 0) return sentences[Math.floor(Math.random() * sentences.length)]
     return content.slice(0, 30) + '...'
@@ -42,6 +68,8 @@ export default function StoryCard({
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
+
+  const epilogueSegments = useMemo(() => formatStoryText(epilogue), [epilogue])
 
   return (
     <motion.div
@@ -69,12 +97,27 @@ export default function StoryCard({
       </div>
 
       <div className="card-warm rounded-2xl p-6 mb-4">
-        <p className="text-amber-100/80 text-sm leading-relaxed whitespace-pre-line font-serif">{content}</p>
+        <StoryContent raw={content} />
       </div>
 
       <div className="card-ghost rounded-xl px-4 py-3 mb-4">
-        <p className="text-amber-600/50 text-xs mb-1 font-serif">尾声</p>
-        <p className="text-amber-200/70 text-sm leading-relaxed font-serif">{epilogue}</p>
+        <p className="text-amber-600/50 text-xs mb-2 font-serif">尾声</p>
+        <div className="space-y-1">
+          {epilogueSegments.map((seg, i) => {
+            if (seg.type === 'dialogue') {
+              return (
+                <p key={i} className="text-amber-200/70 text-sm leading-loose font-serif pl-3 border-l-2 border-amber-500/15">
+                  {seg.text}
+                </p>
+              )
+            }
+            return (
+              <p key={i} className="text-amber-200/70 text-sm leading-loose font-serif indent-[2em]">
+                {seg.text}
+              </p>
+            )
+          })}
+        </div>
       </div>
 
       <div className="card-glass rounded-xl px-4 py-3 mb-5">

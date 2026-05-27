@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect } from 'react'
 import Home from '@/pages/Home'
@@ -6,8 +6,9 @@ import Quiz from '@/pages/Quiz'
 import Result from '@/pages/Result'
 import TokenInput from '@/pages/TokenInput'
 import Story from '@/pages/Story'
+import StoryReview from '@/pages/StoryReview'
 
-const ROUTE_ORDER = ['/', '/quiz', '/result', '/token', '/story']
+const ROUTE_ORDER = ['/', '/quiz', '/result', '/token', '/story', '/stories']
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -45,6 +46,7 @@ function AnimatedRoutes() {
         <Route path="/result" element={<PageWrapper><Result /></PageWrapper>} />
         <Route path="/token" element={<PageWrapper><TokenInput /></PageWrapper>} />
         <Route path="/story" element={<PageWrapper><Story /></PageWrapper>} />
+        <Route path="/stories" element={<PageWrapper><StoryReview /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   )
@@ -52,11 +54,11 @@ function AnimatedRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/bookmatch">
+    <HashRouter>
       <div className="min-h-screen parchment-bg text-amber-100">
         <ScrollToTop />
         <AnimatedRoutes />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }

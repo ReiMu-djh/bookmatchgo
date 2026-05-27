@@ -1,5 +1,7 @@
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Lock } from 'lucide-react'
+import { formatStoryText } from '@/utils/storyFormat'
 
 interface HalfStoryCardProps {
   title: string
@@ -9,6 +11,8 @@ interface HalfStoryCardProps {
 }
 
 export default function HalfStoryCard({ title, hook, halfStory, tags }: HalfStoryCardProps) {
+  const segments = useMemo(() => formatStoryText(halfStory), [halfStory])
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -29,7 +33,22 @@ export default function HalfStoryCard({ title, hook, halfStory, tags }: HalfStor
       </div>
 
       <div className="relative card-warm rounded-2xl p-6 overflow-hidden">
-        <p className="text-amber-100/70 text-sm leading-relaxed font-serif">{halfStory}</p>
+        <div className="space-y-2">
+          {segments.map((seg, i) => {
+            if (seg.type === 'dialogue') {
+              return (
+                <p key={i} className="text-amber-200/80 text-sm leading-loose font-serif pl-4 border-l-2 border-amber-500/15">
+                  {seg.text}
+                </p>
+              )
+            }
+            return (
+              <p key={i} className="text-amber-100/65 text-sm leading-loose font-serif indent-[2em]">
+                {seg.text}
+              </p>
+            )
+          })}
+        </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#1a1410] to-transparent flex items-end justify-center pb-4">
           <div className="flex items-center gap-1.5 text-amber-400/40 text-xs font-serif">

@@ -108,15 +108,15 @@ export default function Home() {
                   className="w-10 h-10 flex items-center justify-center rounded-full text-base font-serif font-bold border"
                   style={{
                     color: d.secondaryColor,
-                    borderColor: `${d.secondaryColor}44`,
-                    backgroundColor: `${d.primaryColor}bb`,
-                    boxShadow: `0 0 12px ${d.secondaryColor}20`,
+                    borderColor: `${d.secondaryColor}66`,
+                    backgroundColor: `${d.primaryColor}cc`,
+                    boxShadow: `0 0 12px ${d.secondaryColor}30`,
                   }}
                   animate={{
                     boxShadow: [
-                      `0 0 8px ${d.secondaryColor}15`,
-                      `0 0 18px ${d.secondaryColor}30`,
-                      `0 0 8px ${d.secondaryColor}15`,
+                      `0 0 8px ${d.secondaryColor}20`,
+                      `0 0 20px ${d.secondaryColor}40`,
+                      `0 0 8px ${d.secondaryColor}20`,
                     ],
                   }}
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: i * 0.3 }}
@@ -125,7 +125,7 @@ export default function Home() {
                 </motion.span>
                 <span
                   className="text-xs font-serif font-bold tracking-wider"
-                  style={{ color: `${d.secondaryColor}dd` }}
+                  style={{ color: d.primaryColor }}
                 >
                   {d.name}
                 </span>
