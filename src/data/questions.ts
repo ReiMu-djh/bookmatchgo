@@ -17,20 +17,20 @@ export const questions: Question[] = [
     scene: '你穿越到了修仙世界，醒来发现自己在宗门大比的擂台上，对面是筑基期高手，你只是练气期菜鸟——但你必须上场',
     options: [
       {
-        text: '先鞠躬认输，等对方转身时悄悄溜下擂台',
-        scores: { COWARD: 3 },
+        text: '正面硬刚，就算输也要让对方记住你',
+        scores: { HOTBLOOD: 2, VILLAIN: 1 },
       },
       {
-        text: '管他什么境界！先出一拳再说，气势不能输！',
-        scores: { HOTBLOOD: 3 },
+        text: '被打倒七次又站起来八次，用耐力拖垮对方',
+        scores: { UNDERDOG: 2, HOTBLOOD: 1 },
       },
       {
-        text: '上场前就已经在擂台布了三重阵法，等对方自己踩进来',
-        scores: { STRATEGIST: 3 },
+        text: '示弱认输，但暗中记住对方的招式破绽',
+        scores: { COWARD: 2, STRATEGIST: 1 },
       },
       {
-        text: '深吸一口气，摆出认真的架势——输赢不重要，重在参与',
-        scores: { UNDERDOG: 3 },
+        text: '找规则漏洞拖延时间，等对方自己犯规',
+        scores: { SLACKER: 2, COWARD: 1 },
       },
     ],
   },
@@ -39,20 +39,20 @@ export const questions: Question[] = [
     scene: '你获得了一个金手指，选哪个？',
     options: [
       {
-        text: '命运之眼——能看到所有人的命数和弱点',
-        scores: { STRATEGIST: 3 },
-      },
-      {
-        text: '不灭战魂——越打越强，永远不会倒下',
-        scores: { HOTBLOOD: 3 },
-      },
-      {
         text: '气运加身——出门就能捡到宝，修炼事半功倍',
-        scores: { CHOSEN_ONE: 3 },
+        scores: { CHOSEN_ONE: 2, SLACKER: 1 },
       },
       {
-        text: '执念锁链——你锁定的人永远逃不出你的感知',
-        scores: { YANDERE: 3 },
+        text: '因果锁链——与你结缘之人，命运将与你交织',
+        scores: { YANDERE: 2, STRATEGIST: 1 },
+      },
+      {
+        text: '命运之眼——能看到所有人的命数和弱点',
+        scores: { STRATEGIST: 2, VILLAIN: 1 },
+      },
+      {
+        text: '逆命之种——天赋越差起步越慢，但突破后实力远超同阶',
+        scores: { UNDERDOG: 2, COWARD: 1 },
       },
     ],
   },
@@ -61,20 +61,20 @@ export const questions: Question[] = [
     scene: '宗门里你最信任的人背叛了你，你？',
     options: [
       {
-        text: '从此不再相信任何人，只信自己',
-        scores: { YANDERE: 3 },
+        text: '忍辱负重，用实力证明离开我是他的损失',
+        scores: { UNDERDOG: 2, STRATEGIST: 1 },
       },
       {
-        text: '卧薪尝胆，总有一天要让他后悔',
-        scores: { UNDERDOG: 3 },
+        text: '封闭内心，从此只靠利益维系关系',
+        scores: { YANDERE: 2, VILLAIN: 1 },
       },
       {
-        text: '早就防着这一天了，后手已经准备好',
-        scores: { STRATEGIST: 3 },
+        text: '一笑置之，缘分尽了就各自安好',
+        scores: { SLACKER: 2, COWARD: 1 },
       },
       {
-        text: '无所谓，换个宗门继续修仙，在哪不是修',
-        scores: { SLACKER: 3 },
+        text: '也许他有自己的苦衷，时间会给出答案',
+        scores: { CHOSEN_ONE: 2, YANDERE: 1 },
       },
     ],
   },
@@ -83,20 +83,20 @@ export const questions: Question[] = [
     scene: '秘境里你和另一名修士同时发现了一件上古神器，谁先拿到归谁，你？',
     options: [
       {
-        text: '先观察对方实力，比自己强就假装没看见',
-        scores: { COWARD: 3 },
+        text: '公平竞争，各凭本事',
+        scores: { HOTBLOOD: 2, UNDERDOG: 1 },
       },
       {
-        text: '直接冲过去抢！先拿到再说！',
-        scores: { HOTBLOOD: 3 },
+        text: '提出共同研究，暗中多学一步',
+        scores: { VILLAIN: 2, STRATEGIST: 1 },
       },
       {
-        text: '跟对方说"这神器有诅咒"，等他犹豫时自己拿',
-        scores: { VILLAIN: 3 },
+        text: '让对方先拿，自己去找更好的',
+        scores: { SLACKER: 2, CHOSEN_ONE: 1 },
       },
       {
-        text: '跟对方合作，神器一人一半，双赢多好',
-        scores: { UNDERDOG: 2, SLACKER: 1 },
+        text: '主动让出，但要求对方欠你一个人情',
+        scores: { COWARD: 2, STRATEGIST: 1 },
       },
     ],
   },
@@ -105,20 +105,20 @@ export const questions: Question[] = [
     scene: '你的道侣被魔修抓走了，你？',
     options: [
       {
-        text: '谁敢动我的人？我让整个魔修一族陪葬',
-        scores: { YANDERE: 3 },
+        text: '不惜代价，哪怕与全世界为敌也要救回',
+        scores: { YANDERE: 2, HOTBLOOD: 1 },
       },
       {
-        text: '冷静分析魔修的弱点，制定精确营救计划',
-        scores: { STRATEGIST: 3 },
+        text: '冷静分析魔修弱点，制定精确营救计划',
+        scores: { STRATEGIST: 2, VILLAIN: 1 },
       },
       {
-        text: '先去借人找帮手，团结一切能团结的力量',
-        scores: { UNDERDOG: 3 },
+        text: '联合其他受害者，组建营救同盟',
+        scores: { UNDERDOG: 2, SLACKER: 1 },
       },
       {
-        text: '道侣？什么道侣？哦那个啊...我再去找一个吧',
-        scores: { SLACKER: 3 },
+        text: '借机打入魔修内部，顺便学他们的功法',
+        scores: { VILLAIN: 2, UNDERDOG: 1 },
       },
     ],
   },
@@ -128,41 +128,41 @@ export const questions: Question[] = [
     options: [
       {
         text: '终于轮到我了！兄弟们跟我冲！',
-        scores: { HOTBLOOD: 3 },
+        scores: { HOTBLOOD: 2, UNDERDOG: 1 },
       },
       {
-        text: '盟主只是个名头，真正的权力在暗处掌控',
-        scores: { STRATEGIST: 2, VILLAIN: 1 },
+        text: '既然大家选了我，那就是天意，当仁不让',
+        scores: { CHOSEN_ONE: 2, HOTBLOOD: 1 },
       },
       {
         text: '什么？当盟主？不了不了我还有事先走了',
-        scores: { SLACKER: 3 },
+        scores: { SLACKER: 2, COWARD: 1 },
       },
       {
         text: '当就当，但规矩得按我的来',
-        scores: { VILLAIN: 3 },
+        scores: { VILLAIN: 2, YANDERE: 1 },
       },
     ],
   },
   {
     id: 'q7',
-    scene: '你在秘境里被困住了，只有一条出路，但需要一个人留下来断后，你？',
+    scene: '宗门分配修炼资源，你被分到了最差的灵石矿脉，别人都嫌弃的地方',
     options: [
       {
-        text: '断后？我先走，活着的人才能报仇',
-        scores: { COWARD: 3 },
+        text: '用笨办法，一天磨一块，三年后反而比别人多练了一倍',
+        scores: { UNDERDOG: 2, COWARD: 1 },
       },
       {
-        text: '我来断后！你们先走！',
-        scores: { HOTBLOOD: 3 },
+        text: '找长老理论！凭什么给我最差的！',
+        scores: { HOTBLOOD: 2, VILLAIN: 1 },
       },
       {
-        text: '断后不等于送死，我来安排所有人都能出去',
-        scores: { STRATEGIST: 3 },
+        text: '先看看最差的地方有没有别人没发现的好处',
+        scores: { COWARD: 2, STRATEGIST: 1 },
       },
       {
-        text: '断后？我？行吧...但得给我记个头功',
-        scores: { SLACKER: 3 },
+        text: '随缘吧，说不定这地方有什么机缘',
+        scores: { CHOSEN_ONE: 2, SLACKER: 1 },
       },
     ],
   },
@@ -172,41 +172,41 @@ export const questions: Question[] = [
     options: [
       {
         text: '当初不该那么冲动，失去了太多人',
-        scores: { HOTBLOOD: 3 },
+        scores: { UNDERDOG: 2, HOTBLOOD: 1 },
       },
       {
-        text: '遗憾？我每一步都是算好的，没有遗憾',
-        scores: { STRATEGIST: 3 },
+        text: '遗憾就是没能守住最重要的那个人',
+        scores: { YANDERE: 2, UNDERDOG: 1 },
       },
       {
         text: '遗憾就是当初应该更苟一点，差点翻车',
-        scores: { COWARD: 3 },
+        scores: { COWARD: 2, SLACKER: 1 },
       },
       {
         text: '遗憾就是这一路太顺了，都没什么故事可以吹',
-        scores: { CHOSEN_ONE: 3 },
+        scores: { CHOSEN_ONE: 2, YANDERE: 1 },
       },
     ],
   },
   {
     id: 'q9',
-    scene: '你捡到一本神秘功法，修炼后可能走火入魔，但威力无比，你？',
+    scene: '你在秘境深处发现一把上古灵剑，剑身传来强烈共鸣，但所有人都说这把剑被诅咒过，历代主人皆不得善终',
     options: [
       {
-        text: '风险太大，还是老老实实练基础功法吧',
-        scores: { COWARD: 3 },
+        text: '诅咒？听着就麻烦，还是别碰了',
+        scores: { SLACKER: 2, CHOSEN_ONE: 1 },
       },
       {
-        text: '不入虎穴焉得虎子！直接开练！',
-        scores: { HOTBLOOD: 3 },
+        text: '管它什么诅咒！我和它有缘，我偏要试试！',
+        scores: { HOTBLOOD: 2, UNDERDOG: 1 },
       },
       {
-        text: '先研究功法结构，找到规避风险的方法再练',
-        scores: { STRATEGIST: 3 },
+        text: '先研究诅咒的来源，看看能否化解',
+        scores: { STRATEGIST: 2, VILLAIN: 1 },
       },
       {
-        text: '走火入魔？那又怎样？我命由我不由天！',
-        scores: { UNDERDOG: 3 },
+        text: '别人不得善终不代表我也不行，这把剑我要定了',
+        scores: { VILLAIN: 2, YANDERE: 1 },
       },
     ],
   },
@@ -216,41 +216,41 @@ export const questions: Question[] = [
     options: [
       {
         text: '假装没看见，多一事不如少一事',
-        scores: { COWARD: 3 },
+        scores: { COWARD: 2, SLACKER: 1 },
       },
       {
-        text: '直接上去制止！修炼禁术是邪道！',
-        scores: { HOTBLOOD: 3 },
+        text: '私下找那个人，问清楚修炼禁术的原因',
+        scores: { UNDERDOG: 2, HOTBLOOD: 1 },
       },
       {
-        text: '先收集证据，再找合适的时机揭发',
-        scores: { STRATEGIST: 3 },
+        text: '这个人我盯上了，他的一举一动我都要知道',
+        scores: { YANDERE: 2, STRATEGIST: 1 },
       },
       {
         text: '这关我什么事？继续睡我的觉',
-        scores: { SLACKER: 3 },
+        scores: { SLACKER: 2, CHOSEN_ONE: 1 },
       },
     ],
   },
   {
     id: 'q11',
-    scene: '你遇到了一个千年难遇的机缘，但需要放弃现在的一切，你？',
+    scene: '你卡在修炼瓶颈已经三百年了，所有同辈都已突破，只有你还停在原地',
     options: [
       {
-        text: '放弃一切太冒险了，还是安稳点好',
-        scores: { COWARD: 3 },
+        text: '也许我天赋到此为止了，安于现状也不错',
+        scores: { CHOSEN_ONE: 2, SLACKER: 1 },
       },
       {
-        text: '机缘难得！拼了！',
-        scores: { HOTBLOOD: 3 },
+        text: '既然正常方法不行，那就走偏门，总有一条路能通',
+        scores: { VILLAIN: 2, UNDERDOG: 1 },
       },
       {
-        text: '分析利弊，看看是否值得放弃',
-        scores: { STRATEGIST: 3 },
+        text: '一定有我遗漏的关键，重新审视所有修炼理论',
+        scores: { STRATEGIST: 2, VILLAIN: 1 },
       },
       {
-        text: '顺其自然吧，该是我的就是我的',
-        scores: { CHOSEN_ONE: 3 },
+        text: '急什么，该突破的时候自然就突破了',
+        scores: { COWARD: 2, CHOSEN_ONE: 1 },
       },
     ],
   },
@@ -259,20 +259,20 @@ export const questions: Question[] = [
     scene: '有人当众羞辱你，你？',
     options: [
       {
-        text: '忍一时风平浪静，退一步海阔天空',
-        scores: { COWARD: 3 },
-      },
-      {
-        text: '是可忍孰不可忍！动手！',
-        scores: { HOTBLOOD: 3 },
+        text: '冷静分析对方的弱点，找最痛的地方回击',
+        scores: { STRATEGIST: 2, VILLAIN: 1 },
       },
       {
         text: '君子报仇十年不晚，记下来慢慢算',
-        scores: { VILLAIN: 3 },
+        scores: { VILLAIN: 2, YANDERE: 1 },
       },
       {
         text: '无所谓，他说的又不是真的',
-        scores: { SLACKER: 3 },
+        scores: { SLACKER: 2, CHOSEN_ONE: 1 },
+      },
+      {
+        text: '忍一时风平浪静，但暗自发誓要变强',
+        scores: { COWARD: 2, HOTBLOOD: 1 },
       },
     ],
   },
@@ -281,20 +281,20 @@ export const questions: Question[] = [
     scene: '你被困在一个山洞里，唯一的食物是一只会说话的兔子，你？',
     options: [
       {
-        text: '吃了它！活着最重要',
-        scores: { COWARD: 3 },
+        text: '这只兔子和我有缘，谁也不许动它',
+        scores: { YANDERE: 2, CHOSEN_ONE: 1 },
       },
       {
-        text: '怎么能吃兔子！我宁愿饿死！',
-        scores: { HOTBLOOD: 3 },
+        text: '和兔子组队，它找路我保护它，一起出去',
+        scores: { UNDERDOG: 2, SLACKER: 1 },
       },
       {
-        text: '和兔子做交易，让它带我出去',
-        scores: { STRATEGIST: 3 },
+        text: '跟着兔子走，它既然会说话一定知道出路',
+        scores: { CHOSEN_ONE: 2, COWARD: 1 },
       },
       {
-        text: '跟着兔子走，说不定它能找到出路',
-        scores: { CHOSEN_ONE: 3 },
+        text: '问兔子有没有别的吃的，它住这么久肯定有存货',
+        scores: { STRATEGIST: 2, HOTBLOOD: 1 },
       },
     ],
   },
@@ -304,19 +304,19 @@ export const questions: Question[] = [
     options: [
       {
         text: '赶紧换功法，这太危险了',
-        scores: { COWARD: 3 },
+        scores: { COWARD: 2, SLACKER: 1 },
       },
       {
-        text: '不管！继续练！我命硬！',
-        scores: { HOTBLOOD: 3 },
+        text: '谁敢动我修炼的东西？我一定要找到他',
+        scores: { HOTBLOOD: 2, YANDERE: 1 },
+      },
+      {
+        text: '也许改过的版本反而更好？先试试再说',
+        scores: { CHOSEN_ONE: 2, YANDERE: 1 },
       },
       {
         text: '研究功法漏洞，反推原版',
-        scores: { STRATEGIST: 3 },
-      },
-      {
-        text: '随他去吧，反正我也懒得换',
-        scores: { SLACKER: 3 },
+        scores: { STRATEGIST: 2, VILLAIN: 1 },
       },
     ],
   },
@@ -325,20 +325,20 @@ export const questions: Question[] = [
     scene: '你的好友要去挑战一个几乎不可能战胜的敌人，你？',
     options: [
       {
-        text: '劝他别去，太危险了',
-        scores: { COWARD: 3 },
+        text: '不让他去，他要是出事我怎么办',
+        scores: { YANDERE: 2, COWARD: 1 },
       },
       {
-        text: '跟他一起去！兄弟同生共死！',
-        scores: { HOTBLOOD: 3 },
+        text: '跟他去！兄弟同生共死！',
+        scores: { HOTBLOOD: 2, UNDERDOG: 1 },
       },
       {
-        text: '帮他分析敌人弱点，制定战术',
-        scores: { STRATEGIST: 3 },
+        text: '帮他找到敌人的致命弱点，一击必杀',
+        scores: { VILLAIN: 2, STRATEGIST: 1 },
       },
       {
-        text: '在后面给他们加油吧',
-        scores: { SLACKER: 3 },
+        text: '帮他安排好后路，万一失败也有退路',
+        scores: { SLACKER: 2, UNDERDOG: 1 },
       },
     ],
   },
